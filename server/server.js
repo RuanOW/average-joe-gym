@@ -1,10 +1,13 @@
+var path = require('path')
 var express = require('express')
 var app = express()
 var port = 8000
+var logger = require('./logger')
 
-app.get('/', (req, res) => {
-  res.send('<h3>Hello World</h3>')
-})
+var urlpath = path.join(__dirname, '../frontend/build/')
+
+app.use(logger)
+app.use(express.static(urlpath))
 
 app.get('/api/v1/categories', (req, res) => {
   var categories = ['aerobic', 'strength', 'balance', 'flexibility']
